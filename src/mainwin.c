@@ -73,6 +73,15 @@ struct click_opts
 };
 
 /**
+ * Options/data given to click_handler thread
+ */
+struct update_opts
+{
+  int progress;
+	int repeat_times;
+};
+
+/**
  * Generates a random integer between given values.
  * @param lower The lowest value it can generate
  * @param upper The highest value it can generate
@@ -99,6 +108,21 @@ gboolean toggle_buttons()
 	gtk_widget_set_sensitive(GTK_WIDGET(mainappwindow.start_button), !isClicking);
 	gtk_widget_set_sensitive(GTK_WIDGET(mainappwindow.stop_button), isClicking);
 	return FALSE;
+}
+
+/**
+ * Update Progress label
+ */
+gboolean update_progress(gpointer *data)
+{
+  struct update_opts *args = data;
+  gchar label[100];
+  if (args->repeat_times == 0)
+    sprintf(label, "%d", args->progress);
+  else
+    sprintf(label, "%d/%d", args->progress, args->repeat_times);
+  gtk_button_set_label(GTK_WIDGET(mainappwindow.start_button), label);
+  return FALSE;
 }
 
 /**
@@ -148,6 +172,10 @@ void click_handler(gpointer *data)
 			break;
 		}
 
+    count++;
+    struct update_opts update_args = {count, args->repeat_times};
+    g_idle_add(update_progress, &update_args);
+
 		int sleep = args->sleep * 1000;
 		if (args->random_interval)
 		{
@@ -158,7 +186,6 @@ void click_handler(gpointer *data)
 		else
 			usleep(sleep);
 
-    count++;
 		if (args->repeat)
 		{
 			if (count >= args->repeat_times)
