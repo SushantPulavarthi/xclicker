@@ -158,12 +158,11 @@ void click_handler(gpointer *data)
 		else
 			usleep(sleep);
 
+    count++;
 		if (args->repeat)
 		{
 			if (count >= args->repeat_times)
 				isClicking = FALSE;
-			else
-				count++;
 		}
 	}
 
