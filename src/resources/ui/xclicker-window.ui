@@ -576,6 +576,56 @@
                       </packing>
                     </child>
 
+                    <child>
+                      <object class="GtkCheckButton" id="colour_check">
+                        <property name="label" translatable="yes">Check Colour</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="receives-default">False</property>
+                        <property name="draw-indicator">True</property>
+                        <signal name="toggled" handler="colour_check_toggle" swapped="no" />
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="colour_entry">
+                        <property name="name">ColourButton</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can-focus">True</property>
+                        <!-- <property name="hexpand">True</property> -->
+                        <!-- <property name="placeholder-text" translatable="yes">ms</property> -->
+                        <!-- <signal name="insert-text" handler="insert_handler" swapped="no" /> -->
+                        <!-- <signal name="changed" handler="input_changed_save_handler" swapped="no"/> -->
+                      </object>
+                      <packing>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">5</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="colour_picker">
+                        <property name="name">PickColour</property>
+                        <property name="label" translatable="yes">Get</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can-focus">True</property>
+                        <property name="focus-on-click">False</property>
+                        <property name="receives-default">True</property>
+                        <property name="hexpand">True</property>
+                        <!-- <signal name="pressed" handler="get_button_clicked" swapped="no" /> -->
+                        <signal name="pressed" handler="colour_picker_clicked" swapped="no" />
+                      </object>
+                      <packing>
+                        <property name="left-attach">1</property>
+                        <property name="top-attach">5</property>
+                      </packing>
+                    </child>
+
                   </object>
                 </child>
                 <child type="label">
